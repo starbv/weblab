@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  weblab3_php:
+    container_name: web_php
+    build: docker/php
+    restart: always
+    volumes:
+      - .:/var/www/web/
+    ports:
+      - "9000:9000"
+    depends_on:
+      - weblab3_db
+
+  weblab3_db:
+    container_name: web_db
+    image: postgres:latest
+    restart: always
+    env_file:
+      - ./docker/database/db.env
+    volumes:
+      - ./docker/database/1-init.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./var/lib/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  weblab3_nginx:
+    container_name: web_nginx
+    build: docker/nginx
+    restart: always
+    volumes:
+      - .:/var/www/web/
+      - ./var/nginx/logs:/var/log/nginx:cached
+    ports:
+      - "80:80"
+    depends_on:
+      - weblab3_php

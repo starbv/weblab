@@ -1,0 +1,6 @@
+var/
+vendor/
+.idea/
+.DS_Store/
+.env
+.php_cs.cache
