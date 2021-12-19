@@ -23,24 +23,9 @@ $posts = $_SESSION['posts'];
 </head>
 <body>
 <div class="wrapper">
-    <header id="header" class="header">
-        <div class="header__container _container">
-            <a href="/" class="header__logo"> Photelnv </a>
-            <nav class="header__menu menu">
-                <ul class="menu__list">
-                    <li class="menu__item">
-                        <a href="/" class="menu__link"> Main </a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#popup" class="menu__link popup-link"> Sign in </a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#popup_2" class="menu__link popup-link"> Sign up </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <?php
+        include_once "header.php";
+    ?>
 
     <main class="page">
         <div class="main-block__container _container">
@@ -132,12 +117,12 @@ $posts = $_SESSION['posts'];
                         </div>
                         <div class="content__input-form">
                             <div class="input-form content__container">
-                                <div class="input-form__text">Username</div>
+                                <div class="input-form__text">Email</div>
                                 <input
-                                        id="username"
-                                        name="username"
+                                        id="email"
+                                        name="email"
                                         class="form__input _reqSign _username"
-                                        type="text"
+                                        type="email"
                                         placeholder=" "
                                 />
                                 <div class="errors"></div>
@@ -158,7 +143,9 @@ $posts = $_SESSION['posts'];
                             <div class="input-form button">
                                 <font style="vertical-align: inherit">
                                     <font style="vertical-align: inherit">
-                                        <input type="submit" value="Sign in"
+                                        <button id="loginBtn" class="btn btn-primary pr-5 pl-5">
+                                            Войти
+                                        </button>
                                     </font>
                                 </font>
                             </div>
@@ -272,7 +259,9 @@ $posts = $_SESSION['posts'];
                             <div class="input-form button">
                                 <font style="vertical-align: inherit">
                                     <font style="vertical-align: inherit">
-                                        <input type="submit" value="Sign up"
+                                        <button class="btn btn-primary" id="#signUpBtn" >
+                                            Зарегистрироваться
+                                        </button>
                                     </font>
                                 </font>
                             </div>

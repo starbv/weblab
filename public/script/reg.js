@@ -10,17 +10,42 @@ document.addEventListener('DOMContentLoaded', function () {
     let error = false;
     let errordata = false;
 
-    const regExpName = /^[a-z0-9_-]{3,16}$/;
     const regExpEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
     const regExpPass = /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$/;
 
 
     const submit = () => {
-        alert("The data has been sent");
-        for (let index = 0; index < formReq.length; index++) {
-            const input = formReq[index];
-            console.log(input.value);
+        let sendValue = {}
+        const fio = formReq[0].value.split(' ');
+        sendValue['last_name'] = fio[0];
+        sendValue['first_name'] = fio[1];
+        if (fio.length === 3) {
+            sendValue['patronymic'] = fio[2];
         }
+        sendValue['email'] = formReq[1].value;
+        sendValue['phone'] = formReq[2].value.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '');
+        sendValue['password'] = formReq[3].value;
+        sendValue['confirm_password'] = formReq[4].value;
+        $(document).ready(function () {
+            $.ajax({
+                url: '/ajax_register',
+                type: 'POST',
+                data: {
+                    'data': sendValue
+                },
+                success: function (data) {
+                    const json = JSON.parse(data);
+                    if (json.msg != null) {
+                        alert(json.msg);
+                    } else {
+                        location.reload(true);
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+        });
     };
     const maskPhone = () => {
         const inputsPhone = document.querySelectorAll('input[name="phone"]');
@@ -82,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const validateInput = (input) => {
         switch (input.name) {
             case ("username"):
-                if (!regExpName.test(input.value) && input.value !== "") {
+                if ((input.value.split(' ').length !== 3 ^ input.value.split(' ').length !== 2) === 0) {
                     input.nextElementSibling.textContent =
                         "Please enter a valid username";
                     errordata = false;
@@ -140,11 +165,9 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         formValidate(form);
         if (error) {
-
             if (errordata) {
                 if (check.checked) {
                     submit();
-                    form.reset();
                 }
                 else {
                     alert("Please confirm your consent to data processing.");

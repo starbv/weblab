@@ -19,4 +19,10 @@ class HomeController
         $_SESSION['posts'] = $data;
         RouterService::redirectToPage('home');
     }
+
+    public static function logout()
+    {
+        unset($_SESSION['user_id']);
+        RouterService::redirectToPage('home');
+    }
 }

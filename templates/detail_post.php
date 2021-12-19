@@ -19,24 +19,9 @@ $post = $_SESSION['detail_post'];
 </head>
 <body>
 <div class="wrapper">
-    <header id="header" class="header">
-        <div class="header__container _container">
-            <a href="/" class="header__logo"> Photelnv </a>
-            <nav class="header__menu menu">
-                <ul class="menu__list">
-                    <li class="menu__item">
-                        <a href="/" class="menu__link"> Main </a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#popup" class="menu__link popup-link"> Sign in </a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#popup_2" class="menu__link popup-link"> Sign up </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <?php
+    include_once "header.php";
+    ?>
 
     <main class="page detail-page">
         <div class="container">
@@ -67,6 +52,26 @@ $post = $_SESSION['detail_post'];
                             <span><?= $post['avg_score'] ?></span>
                         </div>
                     </div>
+
+                    <?php if (isset($_SESSION['user_id'])) :?>
+                    <form class="mt-5 mb-5" method="POST" action="/add_score">
+                        <fieldset>
+                            <legend>Оцените работу</legend>
+                            <div class="mb-3">
+                                <label for="disabledSelect" class="form-label">Оценка: </label>
+                                <select id="scoreSelect" name="scoreSelect" class="form-select">
+                                    <option value="1">Ну такое</option>
+                                    <option value="2">Приемлемо</option>
+                                    <option value="3">Можно было и лучше</option>
+                                    <option value="4">Достаточно хорошо</option>
+                                    <option value="5">Отлично</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Оценить</button>
+                        </fieldset>
+                    </form>
+                    <?php endif ?>
+
                     <div class="card__description mt-2">
                         <?= $post['description'] ?>
                     </div>

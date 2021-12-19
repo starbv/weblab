@@ -7,26 +7,41 @@ document.addEventListener('DOMContentLoaded', function () {
     let error = false;
     let errordata = false;
 
-    const regExpName = /^[a-z0-9_-]{3,16}$/;
     const regExpPass = /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$/;
 
 
     const submit = () => {
-
-        alert("The data has been sent");
-        for (let index = 0; index < formReq.length; index++) {
-            const input = formReq[index];
-            console.log(input.value);
-        }
-
+        let sendData = {};
+        sendData['email'] = formReq[0].value;
+        sendData['password'] = formReq[1].value;
+        $(document).ready(function () {
+            $.ajax({
+                url: '/ajax_login',
+                type: 'POST',
+                data: {
+                    'data': sendData
+                },
+                success: function (data) {
+                    let json = JSON.parse(data);
+                    if (json.msg != null) {
+                        alert(json.msg);
+                    } else {
+                        location.reload(true);
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+        });
     };
 
     const validateInput = (input) => {
         switch (input.name) {
-            case ("username"):
-                if (!regExpName.test(input.value) && input.value !== "") {
+            case ("email"):
+                if (input.value == "") {
                     input.nextElementSibling.textContent =
-                        "Please enter a valid username";
+                        "Please enter a valid email";
                     errordata = false;
                 } else {
                     input.nextElementSibling.textContent = "";
@@ -34,7 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 break;
             case ("password"):
-                if (!regExpPass.test(input.value) && input.value !== "") {
+                console.log(input.value);
+                let pwd = input.value.trim();
+                if (pwd.length<8) {
                     input.nextElementSibling.textContent =
                         "Please enter correct password";
                     errordata = false;
@@ -43,11 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     errordata = true;
                 }
                 break;
-
         }
-
     };
-
 
 
     for (let index = 0; index < formReq.length; index++) {
@@ -64,16 +78,12 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         formValidate(form);
         if (error) {
-
             if (errordata) {
                 submit();
-                form.reset();
-            }
-            else {
+            } else {
                 alert('Fill in the fields');
             }
-        }
-        else {
+        } else {
             alert('Fill in the fields');
         }
     }
@@ -86,8 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (input.value === '') {
                     input.nextElementSibling.textContent = "Please enter data";
                     error = false;
-                }
-                else {
+                } else {
                     input.nextElementSibling.textContent = "";
                     error = true;
                 }

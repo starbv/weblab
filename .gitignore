@@ -2,5 +2,6 @@ var/
 vendor/
 .idea/
 .DS_Store/
+uploads/
 .env
 .php_cs.cache

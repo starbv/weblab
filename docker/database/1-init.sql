@@ -30,3 +30,5 @@ create table score (
     post_id int references post(id) not null,
     account_id int references account(id) not null
 );
+
+alter table score add constraint uq_postId_accountId unique (post_id, account_id);
