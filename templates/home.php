@@ -143,8 +143,8 @@ $posts = $_SESSION['posts'];
                             <div class="input-form button">
                                 <font style="vertical-align: inherit">
                                     <font style="vertical-align: inherit">
-                                        <button id="loginBtn" class="btn btn-primary pr-5 pl-5">
-                                            Войти
+                                        <button id="loginBtn" class="btn btn-outline-dark btn-lg btn-block">
+                                            Sign in
                                         </button>
                                     </font>
                                 </font>
@@ -257,13 +257,9 @@ $posts = $_SESSION['posts'];
 
                         <div class="content__button content__container">
                             <div class="input-form button">
-                                <font style="vertical-align: inherit">
-                                    <font style="vertical-align: inherit">
-                                        <button class="btn btn-primary" id="#signUpBtn" >
-                                            Зарегистрироваться
-                                        </button>
-                                    </font>
-                                </font>
+                                <button class="btn btn-outline-dark btn-lg btn-block" id="#signUpBtn" >
+                                    Sign up
+                                </button>
                             </div>
                         </div>
 

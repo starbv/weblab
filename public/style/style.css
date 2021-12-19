@@ -360,7 +360,7 @@ body.lock {
   backdrop-filter: blur(25px);
   border-radius: 13px;
   width: 445px;
-  height: 600px;
+  height: 530px;
   padding-top: 59px;
   transition: all 0.8s ease 0s;
   opacity: 0;
@@ -391,7 +391,7 @@ body.lock {
 .content__button {
   min-height: 40px;
   max-width: 275px;
-  margin-top: 35px;
+  margin-top: 30px;
 }
 
 .button__container {
@@ -472,7 +472,7 @@ body.lock {
   color: black;
 }
 .content__link {
-  margin-top: 40px;
+  margin-top: 23px;
 }
 
 .link {
