@@ -48,6 +48,4 @@ class DatabaseService
         $sth->execute($params);
         return $sth->fetchAll();
     }
-
-
 }

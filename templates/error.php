@@ -18,25 +18,9 @@
 </head>
 <body>
 <div class="wrapper">
-    <header id="header" class="header">
-        <div class="header__container _container">
-            <a href="/" class="header__logo"> Photelnv </a>
-            <nav class="header__menu menu">
-                <ul class="menu__list">
-                    <li class="menu__item">
-                        <a href="/" class="menu__link"> Main </a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#popup" class="menu__link popup-link"> Sign in </a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#popup_2" class="menu__link popup-link"> Sign up </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    <?php
+    include_once "header.php";
+    ?>
     <main class="page detail-page">
         <div class="container">
             <h1 class="text-center error-msg">Что-то пошло не так!</h1>
